@@ -68,7 +68,7 @@ class PushTest < ActionDispatch::IntegrationTest
   end
 
   test "push errors bubble out" do
-    push_gem Rails.root.join("test", "gems", "bad-characters-1.0.0.gem")
+    push_gem gem_file("bad-characters-1.0.0.gem")
 
     assert_response :unprocessable_entity
     assert_match(/cannot process this gem/, response.body)
@@ -96,7 +96,7 @@ class PushTest < ActionDispatch::IntegrationTest
     assert_match(/A yanked version pushed by a previous owner of this gem already exists \(sandworm-1.0.0\)/, response.body)
   end
 
-  test "publishing a gem with ceritifcate but not signatures" do
+  test "publishing a gem with certificate but not signatures" do
     build_gem "sandworm", "2.0.0" do |gemspec|
       gemspec.cert_chain = [File.read(File.expand_path("../certs/chain.pem", __dir__))]
     end
