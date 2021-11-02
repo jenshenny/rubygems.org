@@ -85,6 +85,9 @@ en:
       show_dashboard: Show dashboard
       reset: Reset
       save_key: "Note that we won't be able to show the key to you again. New API key:"
+      multifactor_auth: Multifactor authentication
+      enable_mfa: Enable MFA
+      mfa: MFA
     new:
       new_api_key: New API key
     reset:

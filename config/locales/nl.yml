@@ -77,6 +77,9 @@ nl:
       show_dashboard:
       reset:
       save_key:
+      multifactor_auth:
+      enable_mfa:
+      mfa:
     new:
       new_api_key:
     reset:
