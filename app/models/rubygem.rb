@@ -2,6 +2,8 @@ class Rubygem < ApplicationRecord
   include Patterns
   include RubygemSearchable
 
+  POPULAR_COUNT = 5
+
   has_many :ownerships, -> { confirmed }, dependent: :destroy, inverse_of: :rubygem
   has_many :ownerships_including_unconfirmed, dependent: :destroy, class_name: "Ownership"
   has_many :owners, through: :ownerships, source: :user
@@ -43,6 +45,10 @@ class Rubygem < ApplicationRecord
       .joins(:versions)
       .group(column_names.map { |name| "rubygems.#{name}" }.join(", "))
       .having("COUNT(versions.id) = 1")
+  end
+
+  def self.popular
+    where(downloads: "> 50_000")
   end
 
   def self.name_is(name)
