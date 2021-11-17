@@ -12,3 +12,5 @@
   <%= form.label :password, t('activerecord.attributes.user.password'), :class => 'form__label' %>
   <%= form.password_field :password, :class => 'form__input' %>
 </div>
+
+<%= form.submit t('sign_up'), :data => {:disable_with => t('form_disable_with')}, :class => 'form__submit' %>
