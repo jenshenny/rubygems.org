@@ -31,7 +31,7 @@ class UsersController < Clearance::UsersController
       @user.verify_and_enable_mfa!(@seed, :ui_and_api, otp_param, @expire)
       if @user.errors.any?
         flash[:error] = @user.errors[:base].join
-        render template: "users/new"
+        redirect_to sign_up_path
       else
         @user.save
         Delayed::Job.enqueue EmailConfirmationMailer.new(@user.id)
