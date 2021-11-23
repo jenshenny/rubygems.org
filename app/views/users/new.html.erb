@@ -5,5 +5,5 @@
 </div>
 
 <%= form_for @user do |form| %>
-  <%= render :partial => "/users/#{@user.current_step}", :object => form %>
+  <%= render :partial => "/users/#{session[:order_step]}", :object => form %>
 <% end %>

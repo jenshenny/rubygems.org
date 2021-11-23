@@ -59,14 +59,6 @@ class User < ApplicationRecord
 
   attr_writer :current_step
 
-  def current_step
-    @current_step || steps.first
-  end
-
-  def steps
-    %w[form mfa]
-  end
-
   def self.authenticate(who, password)
     user = find_by(email: who.downcase) || find_by(handle: who)
     user if user&.authenticated?(password)
