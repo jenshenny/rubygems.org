@@ -2,7 +2,7 @@ class Api::V1::RubygemsController < Api::BaseController
   before_action :authenticate_with_api_key, except: %i[show reverse_dependencies]
   before_action :find_rubygem,              only: %i[show reverse_dependencies]
   before_action :cors_preflight_check, only: :show
-  before_action :verify_with_otp, only: %i[create]
+  before_action :check_mfa, only: %i[create]
   after_action  :cors_set_access_control_headers, only: :show
 
   def index

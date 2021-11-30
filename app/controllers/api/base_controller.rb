@@ -25,6 +25,15 @@ class Api::BaseController < ApplicationController
     end
   end
 
+  def check_mfa
+    if @api_key.user&.mfa_required?
+      prompt_text = "Please enable MFA at https://rubygems.org/"
+      render plain: prompt_text, status: :unauthorized
+    else
+      verify_with_otp
+    end
+  end
+
   def verify_with_otp
     otp = request.headers["HTTP_OTP"]
     return if @api_key.user.mfa_api_authorized?(otp)

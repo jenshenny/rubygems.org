@@ -47,7 +47,10 @@ class Api::V1::ApiKeysController < Api::BaseController
   private
 
   def check_mfa(user)
-    if user&.mfa_gem_signin_authorized?(otp)
+    if user&.mfa_required?
+      prompt_text = "Please enable MFA at https://rubygems.org/"
+      render plain: prompt_text, status: :unauthorized
+    elsif user&.mfa_gem_signin_authorized?(otp)
       yield
     elsif user&.mfa_enabled?
       prompt_text = otp.present? ? t(:otp_incorrect) : t(:otp_missing)
