@@ -5,6 +5,5 @@
 </div>
 
 <%= form_for @user do |form| %>
-  <%= render :partial => '/users/form', :object => form %>
-  <%= form.submit t('sign_up'), :data => {:disable_with => t('form_disable_with')}, :class => 'form__submit' %>
+  <%= render :partial => "/users/#{session[:order_step]}", :object => form %>
 <% end %>

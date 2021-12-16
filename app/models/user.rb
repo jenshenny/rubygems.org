@@ -60,6 +60,8 @@ class User < ApplicationRecord
 
   enum mfa_level: { disabled: 0, ui_only: 1, ui_and_api: 2, ui_and_gem_signin: 3 }, _prefix: :mfa
 
+  attr_writer :current_step
+
   def self.authenticate(who, password)
     user = find_by(email: who.downcase) || find_by(handle: who)
     user if user&.authenticated?(password)
